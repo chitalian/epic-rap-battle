@@ -8,10 +8,12 @@ function parseRap(rap: string): Person {
     .filter((line) => line.trim() !== "")
     .join("\n");
   const gender = rapClean.split("\n")[0].split("-")[1].trim();
+  const name = rapClean.split("\n")[0].split("-")[0].trim();
   const verse = rapClean.split("\n").splice(1).join("\n");
   return {
     gender: gender as "Male" | "Female",
     rap: verse,
+    name,
   };
 }
 

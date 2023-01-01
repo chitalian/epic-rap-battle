@@ -10,6 +10,7 @@ const OPEN_API_KEY = process.env.OPENAI_API_KEY!;
 export interface Person {
   gender: "Male" | "Female";
   rap: string;
+  name: string;
 }
 export interface RapBattle {
   person1: Person;
