@@ -47,7 +47,7 @@ async function getOpenAICompletion(
     },
     body: JSON.stringify({
       prompt,
-      max_tokens: 1024,
+      max_tokens: 2048,
       temperature: 0.7,
       frequency_penalty: 0,
       presence_penalty: 0,
