@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Page from "./modules/page";
-import { Row } from "./modules/row";
+import Page from "../modules/page";
+import { Row } from "../modules/row";
 
 export default function Home() {
   return (
