@@ -1,13 +1,9 @@
-import { RapBattle } from "../pages/api/getBattle";
-
-export interface BattleRequest {
-  person1: string;
-  person2: string;
-}
+import { RapVerse } from "../pages/api/getBattle";
+import { BattleRequest } from "./promptBuilder";
 
 export function fetchRapBattle(
   req: BattleRequest,
-  onSuccess: (data: RapBattle) => void,
+  onSuccess: (data: RapVerse) => void,
   onError: (error: string) => void
 ) {
   fetch("/api/getBattle", {
