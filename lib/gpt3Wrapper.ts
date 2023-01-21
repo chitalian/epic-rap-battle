@@ -6,6 +6,7 @@ export class OpenAI {
     this.apiKey = apikey;
   }
   getOpenAICompletion(prompt: string): Promise<Result<string, string>> {
+    console.log("prompt", prompt);
     return getOpenAICompletion(prompt, this.apiKey);
   }
 }
@@ -48,9 +49,10 @@ async function getOpenAICompletion(
     body: JSON.stringify({
       prompt,
       max_tokens: 2048,
-      temperature: 0.7,
-      frequency_penalty: 0,
-      presence_penalty: 0,
+      temperature: 0.0,
+      frequency_penalty: 1,
+      presence_penalty: 2,
+      stop: ["```"],
       top_p: 1,
       logprobs: 1,
     }),

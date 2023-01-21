@@ -12,16 +12,16 @@ export interface Person {
   rap: string;
   name: string;
 }
-export interface RapBattle {
+export interface RapVerse {
   person1: Person;
   person2: Person;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Result<RapBattle, string>>
+  res: NextApiResponse<Result<RapVerse, string>>
 ) {
-  const { person1, person2 } = req.body;
+  const { person1, person2, prevVerses } = req.body;
   console.log("OPEN_API_KEY", OPEN_API_KEY);
 
   if (!person1 || !person2) {
@@ -30,7 +30,7 @@ export default async function handler(
   }
   const oai = new OpenAI(OPEN_API_KEY);
   const { data: completion, error: completionError } =
-    await oai.getOpenAICompletion(promptBuilder(person1, person2));
+    await oai.getOpenAICompletion(promptBuilder(person1, person2, prevVerses));
 
   if (completionError !== null) {
     res.status(500).json({

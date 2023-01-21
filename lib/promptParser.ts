@@ -1,4 +1,4 @@
-import { Person, RapBattle } from "../pages/api/getBattle";
+import { Person, RapVerse } from "../pages/api/getBattle";
 import { Result } from "./result";
 
 function parseRap(rap: string): Person {
@@ -17,7 +17,7 @@ function parseRap(rap: string): Person {
   };
 }
 
-export function promptParser(prompt: string): Result<RapBattle, string> {
+export function promptParser(prompt: string): Result<RapVerse, string> {
   console.log("promptParser", prompt);
   const person1Rap = parseRap(prompt.split("---")[0]);
   const person2Rap = parseRap(prompt.split("---")[1]);

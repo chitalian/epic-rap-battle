@@ -1,24 +1,67 @@
-export function promptBuilder(person1: string, person2: string): string {
-  return `${person1} vs ${person2} battle.
-Here are the rules
-1. Each must make fun of the other
-2. Must rhyme
-3. Must be creative
-4. Add commas for pauses
-5. Must have 3 verses each
+import { RapVerse } from "../pages/api/getBattle";
 
-Format:
-where gender is either Female or Male
+export function promptBuilder(
+  person1: string,
+  person2: string,
+  prevVerses: RapVerse[] = []
+): string {
+  return `This is a rap battle between ${person1} and ${person2}.
+
+Here are the rules that apply to each rapper with the following multipliers:
+- Lines in a verse must rhyme
+- Creativity
+- Flaunting their success
+- Making fun of the opponent
+- Aggressiveness towards the opponent
+
+Verse format:
 \`\`\`
 ${person1} - {gender}
-{verse 1}
-{verse 2}
-{verse 3}
+{line},
+{line}.
+{line},
+{line}.
 ---
 ${person2} - {gender}
-{verse 1}
-{verse 2}
-{verse 3}
+{line},
+{line}.
+{line},
+{line}.
 \`\`\`
-`;
+
+Multipliers:
+{
+${person1}: {
+    "rhyme": 1,
+    "creativity": 1,
+    "flaunting": 1,
+    "make_fun": 5,
+    "aggressiveness": 0
+},
+${person2}: {
+    "rhyme": 1,
+    "creativity": 1,
+    "flaunting": 1,
+    "make_fun": 5,
+    "aggressiveness": 0
+}
+}
+
+
+Previous verses:
+\`\`\`
+${prevVerses.length > 0 ? "" : "None"}
+${prevVerses
+  .map((verse) => {
+    return `${verse.person1.name} - ${verse.person1.gender}
+${verse.person1.rap}
+---
+${verse.person2.name} - ${verse.person2.gender}
+${verse.person2.rap}`;
+  })
+  .join("\n\n")}
+\`\`\`
+
+Next verse:
+\`\`\``;
 }
