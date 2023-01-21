@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: 300px;
+  height: 300px;
+  display: block;
+  position: relative;
+}
+
+.head {
+  width: 50px;
+  height: 60px;
+  border: 5px solid black;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 21px;
+  left: 133px;
+  z-index: 1;
+  animation: rock 1s alternate infinite ease-in-out;
+  transform-origin: center bottom;
+}
+
+@keyframes rock {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+.torso {
+  width: 6px;
+  height: 100px;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+  top: 80px;
+  left: 156px;
+}
+
+.leftleg {
+  width: 6px;
+  height: 100px;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+  top: 175px;
+  left: 155px;
+  transform: rotate(12deg);
+  transform-origin: top;
+}
+
+.rightleg {
+  width: 6px;
+  height: 100px;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+  top: 175px;
+  left: 157px;
+  transform: rotate(-12deg);
+  transform-origin: top;
+}
+
+.leftarm {
+  width: 100px;
+  height: 6px;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+  top: 86px;
+  left: 57px;
+  animation: wave 1s alternate infinite ease-in-out;
+  transform-origin: 100%;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(40deg);
+  }
+}
+
+.rightarm {
+  width: 100px;
+  height: 6px;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+  top: 86px;
+  left: 161px;
+  animation: wave2 1s alternate infinite ease-in-out;
+  transform-origin: 0%;
+}
+
+@keyframes wave2 {
+  0% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(-40deg);
+  }
+}
+
+.leftfoot {
+  width: 30px;
+  height: 6px;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+  top: 270px;
+  left: 110px;
+  transform: rotate(8deg);
+}
+
+.rightfoot {
+  width: 30px;
+  height: 6px;
+  border: 3px solid black;
+  display: block;
+  position: absolute;
+  top: 270px;
+  left: 178px;
+  transform: rotate(-8deg);
+}
+
+.people {
+  margin: auto;
+  width: 50%;
+  padding-top: 220px;
+}
