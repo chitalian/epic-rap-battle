@@ -1,9 +1,5 @@
 import { RapVerse } from "../pages/api/getBattle";
-
-export interface BattleRequest {
-  person1: string;
-  person2: string;
-}
+import { BattleRequest } from "./promptBuilder";
 
 export function fetchRapBattle(
   req: BattleRequest,
