@@ -3,15 +3,19 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Page from "../modules/page";
 import { Row } from "../modules/row";
-import React, { createRef } from 'react'
+import React, { createRef } from "react";
 
 class Home extends React.Component {
-  private conwayRef = createRef<HTMLAudioElement>()
-  private barzRef = createRef<HTMLAudioElement>()
+  private conwayRef = createRef<HTMLAudioElement>();
+  private barzRef = createRef<HTMLAudioElement>();
 
   constructor(props) {
-    super(props)
+    super(props);
   }
+
+  playAudio = () => {
+    this.conwayRef.current.play();
+  };
 
   render() {
     return (
@@ -24,7 +28,7 @@ class Home extends React.Component {
           />
           {/* <link rel="icon" href="/favicon.ico" /> */}
         </Head>
-  
+
         <Page className="gap-4">
           <h1 className="text-xl w-full text-center">Epic Rap Battle</h1>
           {/* <Row className="gap-4 mx-auto max-w-lg">
@@ -37,11 +41,12 @@ class Home extends React.Component {
             <input className="rounded bg-transparent w-full border border-fuchsia-500" />
           </div>
         </Page>
-        <audio src='/tracks/behindbarz.m4a' ref={this.barzRef}></audio>
-        <audio src='/tracks/conway.m4a' ref={this.conwayRef}></audio>
+        <audio src="/tracks/behindbarz.m4a" ref={this.barzRef}></audio>
+        <audio src="/tracks/conway.m4a" ref={this.conwayRef}></audio>
+        <input type="button" value="Play Audio" onClick={this.playAudio} />
       </div>
     );
   }
 }
 
-export default Home
+export default Home;
