@@ -1,11 +1,31 @@
 import { RapVerse } from "../pages/api/getBattle";
 
-export function promptBuilder(
-  person1: string,
-  person2: string,
-  prevVerses: RapVerse[] = []
-): string {
-  return `This is a rap battle between ${person1} and ${person2}.
+export interface RapperConfig {
+  rhyme: number;
+  creativity: number;
+  flaunting: number;
+  make_fun: number;
+  aggressiveness: number;
+}
+
+export interface BattleRequest {
+  person1: {
+    name: string;
+    config: RapperConfig;
+  };
+  person2: {
+    name: string;
+    config: RapperConfig;
+  };
+  prevVerses: RapVerse[];
+}
+
+export function promptBuilder({
+  person1,
+  person2,
+  prevVerses = [],
+}: BattleRequest): string {
+  return `This is a rap battle between ${person1.name} and ${person2.name}.
 
 Here are the rules that apply to each rapper with the following multipliers:
 - Lines in a verse must rhyme
@@ -16,13 +36,13 @@ Here are the rules that apply to each rapper with the following multipliers:
 
 Verse format:
 \`\`\`
-${person1} - {gender}
+${person1.name} - {gender}
 {line},
 {line}.
 {line},
 {line}.
 ---
-${person2} - {gender}
+${person2.name} - {gender}
 {line},
 {line}.
 {line},
@@ -31,19 +51,19 @@ ${person2} - {gender}
 
 Multipliers:
 {
-${person1}: {
-    "rhyme": 1,
-    "creativity": 1,
-    "flaunting": 1,
-    "make_fun": 5,
-    "aggressiveness": 0
+${person1.name}: {
+    "rhyme": ${person1.config.rhyme},
+    "creativity": ${person1.config.creativity},
+    "flaunting": ${person1.config.flaunting},
+    "make_fun": ${person1.config.make_fun},
+    "aggressiveness": ${person1.config.aggressiveness}
 },
-${person2}: {
-    "rhyme": 1,
-    "creativity": 1,
-    "flaunting": 1,
-    "make_fun": 5,
-    "aggressiveness": 0
+${person2.name}: {
+    "rhyme": ${person2.config.rhyme},
+    "creativity": ${person2.config.creativity},
+    "flaunting": ${person2.config.flaunting},
+    "make_fun": ${person2.config.make_fun},
+    "aggressiveness": ${person2.config.aggressiveness}
 }
 }
 
