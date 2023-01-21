@@ -13,6 +13,10 @@ class Home extends React.Component {
     super(props)
   }
 
+  playAudio = () => {
+    this.conwayRef.current.play();
+  }
+
   render() {
     return (
       <div>
@@ -39,6 +43,7 @@ class Home extends React.Component {
         </Page>
         <audio src='/tracks/behindbarz.m4a' ref={this.barzRef}></audio>
         <audio src='/tracks/conway.m4a' ref={this.conwayRef}></audio>
+        <input type="button" value="Play Audio" onClick={this.playAudio}/>
       </div>
     );
   }
