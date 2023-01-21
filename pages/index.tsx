@@ -5,11 +5,11 @@ import Page from "../modules/page";
 import { Row } from "../modules/row";
 import React, { createRef } from 'react'
 
-class Home extends React.Component<{}, {}> {
+class Home extends React.Component {
   private conwayRef = createRef<HTMLAudioElement>()
   private barzRef = createRef<HTMLAudioElement>()
 
-  constructor(props: {}) {
+  constructor(props) {
     super(props)
   }
 
