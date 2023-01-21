@@ -31,3 +31,22 @@ body {
   z-index: 0;
   margin: auto;
 }
+
+#person1 {
+  width: 255px;
+  height: auto;
+  position: absolute;
+  left: 362px;
+  bottom: 331px;
+}
+
+
+/* Custom CSS */
+
+.wrapper div {
+  box-shadow: 0 0 0 3px black;
+}
+
+.people {
+  display: flex;
+}
