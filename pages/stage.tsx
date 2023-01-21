@@ -22,26 +22,26 @@ export default function Stage() {
         {/* <Image id="crowd" src={"/assets/crowd.png"} alt="" height={500} width={1000} /> */}
         {/* <img id="person1" src={"/assets/stick_figure.png"}/> */}
         <div className="people">
-          <div class="wrapper">
-              <div class="head"></div>
-              <div class="torso"></div>
-              <div class="leftarm"></div>
-              <div class="rightarm"></div>
-              <div class="leftleg"></div>
-              <div class="leftfoot"></div>
-              <div class="rightleg"></div>
-              <div class="rightfoot"></div>
+          <div className="wrapper">
+              <div className="head"></div>
+              <div className="torso"></div>
+              <div className="leftarm"></div>
+              <div className="rightarm"></div>
+              <div className="leftleg"></div>
+              <div className="leftfoot"></div>
+              <div className="rightleg"></div>
+              <div className="rightfoot"></div>
           </div>
 
-          <div class="wrapper">
-              <div class="head"></div>
-              <div class="torso"></div>
-              <div class="leftarm"></div>
-              <div class="rightarm"></div>
-              <div class="leftleg"></div>
-              <div class="leftfoot"></div>
-              <div class="rightleg"></div>
-              <div class="rightfoot"></div>
+          <div className="wrapper">
+              <div className="head"></div>
+              <div className="torso"></div>
+              <div className="leftarm"></div>
+              <div className="rightarm"></div>
+              <div className="leftleg"></div>
+              <div className="leftfoot"></div>
+              <div className="rightleg"></div>
+              <div className="rightfoot"></div>
           </div>
         </div>
       </div>
