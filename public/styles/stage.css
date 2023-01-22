@@ -51,6 +51,22 @@ body {
   display: flex;
 }
 
+.caption {
+  color: white;
+  background: black;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'Sedgwick Ave', serif;
+  margin: 1em 3em 1em 3em;
+  z-index: 1;
+  padding: 10px;
+}
+
+.caption-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 
 /* layout/base.css */
 

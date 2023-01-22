@@ -14,6 +14,7 @@ export function fetchImage(
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log("queued image", prompt, data);
       if (data.jobId) {
         const jobId = data.jobId;
         let retries = 12;
