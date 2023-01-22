@@ -51,26 +51,6 @@ export default function Stage({
 
   const speakerL = useRef(null);
   const speakerR = useRef(null);
-  const isDocumentReady = useRef(false);
-
-  useEffect(() => {
-    if (!isDocumentReady.current) return;
-    speakerL.current = document.querySelector(".speakerL");
-    speakerR.current = document.querySelector(".speakerR");
-    gsap.from([speakerL.current, speakerR.current], {
-      duration: 0.3,
-      scale: 1.1,
-      yoyo: true,
-      repeat: -1,
-      ease: "bounce.out",
-    });
-  }, [isDocumentReady]);
-
-  useEffect(() => {
-    if (document.readyState === "complete") {
-      isDocumentReady.current = true;
-    }
-  }, []);
 
   useEffect(() => {
     setActiveSpeaker("person1");
@@ -102,6 +82,13 @@ export default function Stage({
       console.log("PLAYING AUDIO");
       barzRef.current.volume = 0.3;
       barzRef.current.play();
+      gsap.from([speakerL.current, speakerR.current], {
+        duration: bpmToSeconds(BehindBarz.bpm) / 2,
+        scale: 1.1,
+        yoyo: true,
+        repeat: -1,
+        ease: "bounce.out",
+      });
       console.log("PLAYING BARZ", barzRef);
       TTS(
         "Hello everyone! Thank you for visiting our Scale AI Hackathon project! Welcome to the stage, " +
@@ -157,6 +144,9 @@ export default function Stage({
       mainRap();
     }
   }, [introDone, rapVerses]);
+
+  const hasCaption = caption != "";
+
   return (
     <div>
       {/* eslint-disable-next-line @next/next/no-script-component-in-head */}
@@ -234,11 +224,11 @@ export default function Stage({
           </div>
         </div>
 
-        <div className="speakerL">
+        <div className="speakerL" ref={speakerL}>
           <img src="https://image.ibb.co/iFP8Lq/speaker1.png" alt="" />
         </div>
 
-        <div className="speakerR">
+        <div className="speakerR" ref={speakerR}>
           <img src="https://image.ibb.co/nt0hfq/speaker2.png" alt="" />
         </div>
 
@@ -255,7 +245,7 @@ export default function Stage({
         )}
 
         <div className="caption-container">
-          <p className="caption">{caption}</p>
+          <p className="caption" style={hasCaption ? {display: "block"} : null}>{caption}</p>
         </div>
       </div>
       <audio src={BehindBarz.uri} ref={barzRef}></audio>
