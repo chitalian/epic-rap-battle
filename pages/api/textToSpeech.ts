@@ -4,7 +4,15 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 // Import other required libraries
 // Creates a client
-const client = new texttospeech.TextToSpeechClient();
+const clientOpts = {
+  credentials: {
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY,
+  },
+  projectId: process.env.GOOGLE_PROJECT_ID,
+};
+
+const client = new texttospeech.TextToSpeechClient(clientOpts);
 
 export const DefaultVoice: any = {
   languageCode: "en-US",
