@@ -142,13 +142,20 @@ export default function Stage({
           setPerson1Lines((prev) => [...prev, person1Lines[i]]);
           await doAudio(person1Audios[i]);
         }
+
+        let nextRap = null
+        if (rapVerses.length < MAX_VERSUS) {
+          nextRap = getRapBattle(leftName, rightName, rapVerses);
+        }
+
         setActiveSpeaker("person2");
         for (let i = 0; i < person2Lines.length; i++) {
           setPerson2Lines((prev) => [...prev, person2Lines[i]]);
           await doAudio(person2Audios[i]);
         }
-        if (rapVerses.length < MAX_VERSUS) {
-          getRapBattle(leftName, rightName, rapVerses).then((verse) => {
+        
+        if (nextRap) {
+          await nextRap.then((verse) => {
             setRapVerses([...rapVerses, verse]);
           });
         }
