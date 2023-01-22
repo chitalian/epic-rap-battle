@@ -28,7 +28,7 @@ export default function Home() {
         CHOOSE YOUR EPIC RAP BATTLE
       </h1>
       <div className="flex flex-col justify-between">
-        <div className="max-w-md flex flex-col gap-2 m-10">
+        <div className="max-w-md flex flex-col gap-2 m-10 items-center">
           <input
             className="py-2 px-4 rounded bg-transparent w-full border border-fuchsia-500"
             value={name1}
@@ -45,13 +45,14 @@ export default function Home() {
             onChange={(e) => setName2(e.target.value)}
           />
           <button
-            className="py-2 px-4 rounded bg-fuchsia-500 text-white"
+            className="py-2 px-4 rounded bg-fuchsia-500  w-full text-white"
             onClick={() => {
               setSessionStarted(true);
             }}
           >
             Generate
           </button>
+          <div>{"(Does not work on mobile)"}</div>
         </div>
         <div className="flex flex-col items-center gap-2">
           <div>Scale AI Hackathon project team</div>
