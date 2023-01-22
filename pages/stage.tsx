@@ -167,6 +167,7 @@ export default function Stage({
     }
   }, [introDone, rapVerses]);
 
+  const [winner, setWinner] = useState("");
   const hasCaption = caption != "";
 
   return (
@@ -202,6 +203,13 @@ export default function Stage({
         <img id="crowd" src={"/assets/crowd.png"} />
         {/* <Image id="crowd" src={"/assets/crowd.png"} alt="" height={500} width={1000} /> */}
         {/* <img id="person1" src={"/assets/stick_figure.png"}/> */}
+        <div>
+          {winner != "" && (
+            <div className="text-8xl font-bold bg-blue-400 rounded-md p-4">
+              <h1>{winner} wins!</h1>
+            </div>
+          )}
+        </div>
         <div className="people">
           <div
             id="person1"
@@ -320,6 +328,12 @@ export default function Stage({
             </div>
           </div>
         </div>
+        <button
+          className="z-50 absolute bottom-0 right-0 m-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => {}}
+        >
+          Vote
+        </button>
       </div>
       <audio src={BehindBarz.uri} ref={barzRef}></audio>
       <audio src={Conway.uri} ref={conwayRef}></audio>
