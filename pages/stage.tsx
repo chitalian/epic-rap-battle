@@ -97,17 +97,17 @@ export default function Stage({
   }, [isSetup, leftName, rightName]);
   console.log("RAP VERSSES", rapVerses);
   const allLoaded = rapVerses.length > 0 && introDone;
+  const [person1Lines, setPerson1Lines] = useState<string[]>([]);
+  const [person2Lines, setPerson2Lines] = useState<string[]>([]);
 
   useEffect(() => {
-    async function doAudio(person: Person) {
-      return TTS(person.rap, person.gender).then((audio) => {
-        audio.play();
-        return new Promise((resolve) => {
-          console.log("started playing");
-          audio.addEventListener("ended", () => {
-            console.log("AUDIO ENDED");
-            resolve(undefined);
-          });
+    async function doAudio(audio: HTMLAudioElement) {
+      audio.play();
+      return new Promise((resolve) => {
+        console.log("started playing");
+        audio.addEventListener("ended", () => {
+          console.log("AUDIO ENDED");
+          resolve(undefined);
         });
       });
     }
@@ -115,12 +115,27 @@ export default function Stage({
       console.log();
       if (allLoaded) {
         setActiveSpeaker("person1");
-        setCaption(rapVerses[rapVerses.length - 1].person1.rap);
-        await doAudio(rapVerses[rapVerses.length - 1].person1);
+        const person1 = rapVerses[rapVerses.length - 1].person1;
+        const person2 = rapVerses[rapVerses.length - 1].person2;
+        const person1Lines = person1.rap.split("\n");
+        const person2Lines = person2.rap.split("\n");
+        const person1Audios = await Promise.all(
+          person1Lines.map((line) => TTS(line, person1.gender))
+        );
+        const person2Audios = await Promise.all(
+          person2Lines.map((line) => TTS(line, person2.gender))
+        );
 
-        setActiveSpeaker("person2");
-        setCaption(rapVerses[rapVerses.length - 1].person2.rap);
-        await doAudio(rapVerses[rapVerses.length - 1].person2);
+        // loop through each line and play audio
+        for (let i = 0; i < person1Lines.length; i++) {
+          setPerson1Lines((prev) => [...prev, person1Lines[i]]);
+          await doAudio(person1Audios[i]);
+        }
+
+        for (let i = 0; i < person2Lines.length; i++) {
+          setPerson2Lines((prev) => [...prev, person2Lines[i]]);
+          await doAudio(person2Audios[i]);
+        }
         if (rapVerses.length < MAX_VERSUS) {
           getRapBattle(leftName, rightName, rapVerses).then((verse) => {
             setRapVerses([...rapVerses, verse]);
@@ -204,7 +219,44 @@ export default function Stage({
           </div>
         </div>
         <div className="caption-container">
-          <p className="caption">{caption}</p>
+          <div className="flex flex-row max-w-3xl justify-between w-full">
+            <div className="flex flex-col  max-w-md">
+              <p className="z-10 text-md text-gray-200 whitespace-pre-wrap">
+                {
+                  // grab the last 8 liens for person 1
+                  person1Lines
+                    .slice(
+                      Math.max(person1Lines.length - 8, 0),
+                      person1Lines.length - 1
+                    )
+                    .join("\n")
+                }
+              </p>
+              <p className="z-10 text-md text-blue-400 whitespace-pre-wrap">
+                {person1Lines.length > 0 && (
+                  <>{person1Lines[person1Lines.length - 1]}</>
+                )}
+              </p>
+            </div>
+            <div className="flex flex-col max-w-md">
+              <p className="z-10 text-md text-gray-200  whitespace-pre-wrap">
+                {
+                  // grab the last 8 liens for person 1
+                  person2Lines
+                    .slice(
+                      Math.max(person2Lines.length - 8, 0),
+                      person2Lines.length - 1
+                    )
+                    .join("\n")
+                }
+              </p>
+              <p className="z-10 text-md text-red-400 whitespace-pre-wrap">
+                {person2Lines.length > 0 && (
+                  <>{person2Lines[person2Lines.length - 1]}</>
+                )}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <audio src={BehindBarz.uri} ref={barzRef}></audio>
