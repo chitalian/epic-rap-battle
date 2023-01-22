@@ -15,12 +15,6 @@ export const DefaultAudioConfig: any = {
   audioEncoding: "MP3",
 };
 
-export interface TTSRequest {
-  text: string;
-  voice: any;
-  audioConfig: any;
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
