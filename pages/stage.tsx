@@ -174,7 +174,8 @@ export default function Stage({
               style={{
                 backgroundImage: `url('${leftNameImage}')`,
                 backgroundSize: "cover",
-                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`
+                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`,
+                animationName: 'rock-right'
               }}
             ></div>
             <div className="torso"></div>
@@ -195,7 +196,8 @@ export default function Stage({
               style={{
                 backgroundImage: `url('${rightNameImage}')`,
                 backgroundSize: "cover",
-                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`
+                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`,
+                animationName: 'rock-left'
               }}
             ></div>
             <div className="torso"></div>
