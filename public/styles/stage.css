@@ -65,3 +65,20 @@ canvas {
   max-width: 100%;
   vertical-align: middle;
 }
+
+/* Speaker */
+.speakerL {
+	position: absolute;
+	left: 10%;
+	bottom: 250px;
+	z-index: 5;
+  /* scale: 0.8; */
+}
+
+.speakerR {
+	position: absolute;
+	right: 10%;
+	bottom: 250px;
+	z-index: 5;
+  /* scale: 0.8; */
+}

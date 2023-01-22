@@ -7,6 +7,7 @@ import { RapVerse } from "./api/getBattle";
 import { fetchImage } from "../lib/fetchImage";
 import { Conway, BehindBarz } from "../audio/track"
 import Script from 'next/script'
+import { gsap } from 'gsap';
 
 async function loadInitialRap(leftName, rightName) {
   return await fetchRapBattle(
@@ -39,6 +40,29 @@ export default function Stage(props) {
   
   const [ activeSpeaker, setActiveSpeaker ] = useState("");
   const [ rapStart, setRapStart ] = useState(false);
+
+  const speakerL = useRef(null);
+  const speakerR = useRef(null);
+  const isDocumentReady = useRef(false);
+
+  useEffect(() => {
+    if (!isDocumentReady.current) return;
+    speakerL.current = document.querySelector('.speakerL');
+    speakerR.current = document.querySelector('.speakerR');
+    gsap.from([speakerL.current, speakerR.current], {
+      duration: 0.3,
+      scale: 1.1,
+      yoyo: true,
+      repeat: -1,
+      ease: 'bounce.out',
+    });
+  }, [isDocumentReady]);
+
+  useEffect(() => {
+    if (document.readyState === 'complete') {
+      isDocumentReady.current = true;
+    }
+  }, []);
 
   useEffect(() => {
     setActiveSpeaker("person1");
@@ -104,6 +128,14 @@ export default function Stage(props) {
               <div className="rightleg"></div>
               <div className="rightfoot"></div>
           </div>
+        </div>
+        
+        <div className="speakerL">
+          <img src="https://image.ibb.co/iFP8Lq/speaker1.png" alt="" />
+        </div>
+
+        <div className="speakerR">
+          <img src="https://image.ibb.co/nt0hfq/speaker2.png" alt="" />
         </div>
       </div>
 
