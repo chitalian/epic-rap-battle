@@ -9,6 +9,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const clientOpts = {
+    credentials: {
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY,
+    },
+    projectId: process.env.GOOGLE_PROJECT_ID,
+  };
+  console.error("clientOpts", clientOpts);
   const prompt = req.body.prompt as string;
 
   console.log("Queueing image request", prompt);
