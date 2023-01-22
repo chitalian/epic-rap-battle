@@ -12,6 +12,7 @@ const clientOpts = {
   projectId: process.env.GOOGLE_PROJECT_ID,
 };
 
+console.error("client opts", clientOpts);
 const client = new texttospeech.TextToSpeechClient(clientOpts);
 
 const MaleVoice: texttospeech.protos.google.cloud.texttospeech.v1.IVoiceSelectionParams =
@@ -33,7 +34,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.error("client opts", clientOpts);
   // Construct the request f
   const request: texttospeech.protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest =
     {
