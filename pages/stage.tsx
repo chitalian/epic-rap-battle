@@ -58,6 +58,7 @@ export default function Stage({
   const [isSetup, setIsSetup] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const [currentVerse, setCurrentVerse] = useState(0);
+  const [caption, setCaption] = useState("This is a really long sample rap verse for calculating the length and position and the css to apply here");
 
   const barzRef = useRef<HTMLAudioElement>();
   const conwayRef = useRef<HTMLAudioElement>();
@@ -192,6 +193,9 @@ export default function Stage({
             <div className="rightleg"></div>
             <div className="rightfoot"></div>
           </div>
+        </div>
+        <div className="caption-container">
+          <p className="caption">{caption}</p>
         </div>
       </div>
       <audio src={BehindBarz.uri} ref={barzRef}></audio>
