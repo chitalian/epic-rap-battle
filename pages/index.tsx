@@ -25,7 +25,7 @@ export default function Home() {
       }}
     >
       <h1 className="pt-10 text-6xl font-bold text-center">
-        CHOOSE YOUR RAP BATTLE
+        CHOOSE YOUR EPIC RAP BATTLE
       </h1>
       <div className="max-w-md flex flex-col gap-2 m-10">
         <input
