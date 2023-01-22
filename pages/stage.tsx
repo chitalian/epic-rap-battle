@@ -10,7 +10,9 @@ import Script from "next/script";
 import { Router, useRouter } from "next/router";
 import { TTS } from "../lib/fetchTTS";
 
-async function loadInitialRap(leftName, rightName) {
+const MAX_VERSUS = 3;
+
+async function getRapBattle(leftName, rightName, prevVerses?: RapVerse[]) {
   return await fetchRapBattle({
     person1: {
       name: leftName,
@@ -32,7 +34,7 @@ async function loadInitialRap(leftName, rightName) {
         aggressiveness: 10,
       },
     },
-    prevVerses: [],
+    prevVerses,
   });
 }
 
@@ -57,10 +59,8 @@ export default function Stage({
   const [loading, setLoading] = useState(false);
   const [isSetup, setIsSetup] = useState(false);
   const [introDone, setIntroDone] = useState(false);
-  const [currentVerse, setCurrentVerse] = useState(0);
-  const [caption, setCaption] = useState(
-    "This is a really long sample rap verse for calculating the length and position and the css to apply here"
-  );
+
+  const [caption, setCaption] = useState("");
 
   const barzRef = useRef<HTMLAudioElement>();
   const conwayRef = useRef<HTMLAudioElement>();
@@ -70,7 +70,7 @@ export default function Stage({
       setIsSetup(true);
       console.log("HIIIIII");
     } else {
-      loadInitialRap(leftName, rightName).then((verse) => {
+      getRapBattle(leftName, rightName).then((verse) => {
         setRapVerses([...rapVerses, verse]);
       });
       fetchImage(leftName, setLeftNameImage, () => {});
@@ -115,17 +115,24 @@ export default function Stage({
       console.log();
       if (allLoaded) {
         setActiveSpeaker("person1");
-        await doAudio(rapVerses[currentVerse].person1);
+        setCaption(rapVerses[rapVerses.length - 1].person1.rap);
+        await doAudio(rapVerses[rapVerses.length - 1].person1);
 
         setActiveSpeaker("person2");
-        await doAudio(rapVerses[currentVerse].person2);
+        setCaption(rapVerses[rapVerses.length - 1].person2.rap);
+        await doAudio(rapVerses[rapVerses.length - 1].person2);
+        if (rapVerses.length < MAX_VERSUS) {
+          getRapBattle(leftName, rightName, rapVerses).then((verse) => {
+            setRapVerses([...rapVerses, verse]);
+          });
+        }
       }
     }
     if (introDone) {
       console.log("ALL LOADED");
       mainRap();
     }
-  }, [introDone]);
+  }, [introDone, rapVerses]);
   return (
     <div>
       {/* eslint-disable-next-line @next/next/no-script-component-in-head */}
