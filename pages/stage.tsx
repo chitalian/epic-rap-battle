@@ -157,6 +157,9 @@ export default function Stage({
       mainRap();
     }
   }, [introDone, rapVerses]);
+
+  const hasCaption = caption != "";
+
   return (
     <div>
       {/* eslint-disable-next-line @next/next/no-script-component-in-head */}
@@ -243,7 +246,7 @@ export default function Stage({
         </div>
 
         <div className="caption-container">
-          <p className="caption">{caption}</p>
+          <p className="caption" style={hasCaption ? {display: "block"} : null}>{caption}</p>
         </div>
       </div>
       <audio src={BehindBarz.uri} ref={barzRef}></audio>
