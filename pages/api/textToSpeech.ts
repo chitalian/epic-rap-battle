@@ -33,7 +33,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // Construct the request
+  // Construct the request f
   const request: texttospeech.protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest =
     {
       input: {
