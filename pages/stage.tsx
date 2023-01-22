@@ -262,15 +262,15 @@ export default function Stage({
         </div>
 
         {activeSpeaker === "person1" && (
-        <div className="lightL">
-          <img src="https://image.ibb.co/f6Hv0q/lightL.png" alt="" />
-        </div>
+          <div className="lightL">
+            <img src="https://image.ibb.co/f6Hv0q/lightL.png" alt="" />
+          </div>
         )}
 
         {activeSpeaker === "person2" && (
-        <div className="lightR">
-          <img src="https://image.ibb.co/j6Lhfq/lightR.png" alt="" />
-        </div>
+          <div className="lightR">
+            <img src="https://image.ibb.co/j6Lhfq/lightR.png" alt="" />
+          </div>
         )}
 
         <div className="caption-container">
