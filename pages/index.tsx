@@ -20,6 +20,7 @@ export default function Home() {
       <input
         className="rounded bg-transparent w-full border border-fuchsia-500"
         value={name1}
+        placeholder="Person 1"
         onChange={(e) => setName1(e.target.value)}
       />
       <p>
@@ -28,6 +29,7 @@ export default function Home() {
       <input
         className="rounded bg-transparent w-full border border-fuchsia-500"
         value={name2}
+        placeholder="Person 2"
         onChange={(e) => setName2(e.target.value)}
       />
       <button
