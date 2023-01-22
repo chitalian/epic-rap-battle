@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { fetchRapBattle } from "../lib/fetchRapBattle";
 import { Person, RapVerse } from "./api/getBattle";
 import { fetchImage } from "../lib/fetchImage";
-import { Conway, BehindBarz } from "../audio/track";
+import { Conway, BehindBarz, bpmToSeconds } from "../audio/track";
 import Script from "next/script";
 import { Router, useRouter } from "next/router";
 import { TTS } from "../lib/fetchTTS";
@@ -147,6 +147,8 @@ export default function Stage({
         <link href="/styles/stage.css" rel="stylesheet" />
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link href="/styles/stick.css" rel="stylesheet" />
+        <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Sedgwick+Ave"/>
         <Script src="/scripts/smoke.js"></Script>
       </Head>
       <div>
@@ -172,11 +174,12 @@ export default function Stage({
               style={{
                 backgroundImage: `url('${leftNameImage}')`,
                 backgroundSize: "cover",
+                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`
               }}
             ></div>
             <div className="torso"></div>
-            <div className="leftarm"></div>
-            <div className="rightarm"></div>
+            <div className="leftarm" style={{animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s`}}></div>
+            <div className="rightarm" style={{animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s`}}></div>
             <div className="leftleg"></div>
             <div className="leftfoot"></div>
             <div className="rightleg"></div>
@@ -192,11 +195,12 @@ export default function Stage({
               style={{
                 backgroundImage: `url('${rightNameImage}')`,
                 backgroundSize: "cover",
+                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`
               }}
             ></div>
             <div className="torso"></div>
-            <div className="leftarm"></div>
-            <div className="rightarm"></div>
+            <div className="leftarm" style={{animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s`}}></div>
+            <div className="rightarm" style={{animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s`}}></div>
             <div className="leftleg"></div>
             <div className="leftfoot"></div>
             <div className="rightleg"></div>
