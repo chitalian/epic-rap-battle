@@ -22,14 +22,14 @@ export default function Home() {
         value={name1}
         onChange={(e) => setName1(e.target.value)}
       />
+      <p>
+        {name1} vs {name2}
+      </p>
       <input
         className="rounded bg-transparent w-full border border-fuchsia-500"
         value={name2}
         onChange={(e) => setName2(e.target.value)}
       />
-      <p>
-        {name1} vs {name2}
-      </p>
       <button
         className="rounded bg-fuchsia-500 text-white"
         onClick={() => {
