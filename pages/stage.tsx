@@ -57,9 +57,10 @@ export default function Stage({
   const [loading, setLoading] = useState(false);
   const [isSetup, setIsSetup] = useState(false);
   const [introDone, setIntroDone] = useState(false);
+  const [currentVerse, setCurrentVerse] = useState(0);
 
-  const barzRef = useRef();
-  const conwayRef = useRef();
+  const barzRef = useRef<HTMLAudioElement>();
+  const conwayRef = useRef<HTMLAudioElement>();
 
   useEffect(() => {
     if (!isSetup) {
@@ -70,6 +71,9 @@ export default function Stage({
       fetchImage(leftName, setLeftNameImage, () => {});
       fetchImage(rightName, setRightNameImage, () => {});
       console.log("PLAYING AUDIO");
+      barzRef.current.volume = 0.4;
+      barzRef.current.play();
+      console.log("PLAYING BARZ", barzRef);
       TTS(
         "Hello everyone! Thank you for visiting our Scale AI Hackathon project! Welcome to the stage, " +
           leftName +
