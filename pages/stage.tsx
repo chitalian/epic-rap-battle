@@ -142,13 +142,20 @@ export default function Stage({
           setPerson1Lines((prev) => [...prev, person1Lines[i]]);
           await doAudio(person1Audios[i]);
         }
+
+        let nextRap = null;
+        if (rapVerses.length < MAX_VERSUS) {
+          nextRap = getRapBattle(leftName, rightName, rapVerses);
+        }
+
         setActiveSpeaker("person2");
         for (let i = 0; i < person2Lines.length; i++) {
           setPerson2Lines((prev) => [...prev, person2Lines[i]]);
           await doAudio(person2Audios[i]);
         }
-        if (rapVerses.length < MAX_VERSUS) {
-          getRapBattle(leftName, rightName, rapVerses).then((verse) => {
+
+        if (nextRap) {
+          await nextRap.then((verse) => {
             setRapVerses([...rapVerses, verse]);
           });
         }
@@ -274,38 +281,38 @@ export default function Stage({
         )}
 
         <div className="caption-container">
-          <div className="flex flex-row max-w-3xl justify-between w-full">
-            <div className="flex flex-col  max-w-md">
-              <p className="z-10 text-md text-gray-200 whitespace-pre-wrap">
+          <div className="grid grid-cols-2 mx-40 justify-between w-full items-center text-xl">
+            <div className="z-30 flex flex-col w-full bg-black p-2 bg-opacity-50">
+              <p className="z-10  text-gray-200 whitespace-pre-wrap">
                 {
                   // grab the last 8 liens for person 1
                   person1Lines
                     .slice(
-                      Math.max(person1Lines.length - 8, 0),
+                      Math.max(person1Lines.length - 4, 0),
                       person1Lines.length - 1
                     )
                     .join("\n")
                 }
               </p>
-              <p className="z-10 text-md text-blue-400 whitespace-pre-wrap">
+              <p className="z-10  text-blue-400 whitespace-pre-wrap">
                 {person1Lines.length > 0 && (
                   <>{person1Lines[person1Lines.length - 1]}</>
                 )}
               </p>
             </div>
-            <div className="flex flex-col max-w-md">
-              <p className="z-10 text-md text-gray-200  whitespace-pre-wrap">
+            <div className="z-30  flex flex-col w-full bg-black p-2">
+              <p className="z-10  text-gray-200  whitespace-pre-wrap">
                 {
                   // grab the last 8 liens for person 1
                   person2Lines
                     .slice(
-                      Math.max(person2Lines.length - 8, 0),
+                      Math.max(person2Lines.length - 4, 0),
                       person2Lines.length - 1
                     )
                     .join("\n")
                 }
               </p>
-              <p className="z-10 text-md text-red-400 whitespace-pre-wrap">
+              <p className="z-10 text-red-400 whitespace-pre-wrap">
                 {person2Lines.length > 0 && (
                   <>{person2Lines[person2Lines.length - 1]}</>
                 )}
