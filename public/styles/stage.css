@@ -32,13 +32,13 @@ body {
   margin: auto;
 }
 
-#person1 {
+/* #person1 {
   width: 255px;
   height: auto;
   position: absolute;
   left: 362px;
   bottom: 331px;
-}
+} */
 
 
 /* Custom CSS */
@@ -49,4 +49,19 @@ body {
 
 .people {
   display: flex;
+}
+
+
+/* layout/base.css */
+
+body {
+  margin: 0;
+}
+
+/* modules/canvas.css */
+
+canvas {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
 }

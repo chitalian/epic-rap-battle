@@ -47,9 +47,16 @@
   top: -104px;
   left: 75px;
   z-index: 1;
-  animation: rock 1s alternate infinite ease-in-out;
   transform-origin: center bottom;
 }
+
+.active .head {
+  animation: rock 1s alternate infinite ease-in-out;
+}
+
+/* .head:not(.active) {
+  animation: none !important
+} */
 
 @keyframes rock {
   0% {
@@ -102,8 +109,13 @@
   position: absolute;
   top: 86px;
   left: 57px;
-  animation: wave 1s alternate infinite ease-in-out;
   transform-origin: 100%;
+
+  transform: rotate(314deg);
+}
+
+.active .leftarm {
+  animation: wave 1s alternate infinite ease-in-out;
 }
 
 @keyframes wave {
@@ -123,8 +135,13 @@
   position: absolute;
   top: 86px;
   left: 161px;
-  animation: wave2 1s alternate infinite ease-in-out;
   transform-origin: 0%;
+
+  transform: rotate(46deg);
+}
+
+.active .rightarm {
+  animation: wave2 1s alternate infinite ease-in-out;
 }
 
 @keyframes wave2 {
