@@ -9,7 +9,7 @@ import { Conway, BehindBarz, bpmToSeconds } from "../audio/track";
 import Script from "next/script";
 import { Router, useRouter } from "next/router";
 import { TTS } from "../lib/fetchTTS";
-import { gsap } from 'gsap';
+import { gsap } from "gsap";
 
 const MAX_VERSUS = 3;
 
@@ -55,19 +55,19 @@ export default function Stage({
 
   useEffect(() => {
     if (!isDocumentReady.current) return;
-    speakerL.current = document.querySelector('.speakerL');
-    speakerR.current = document.querySelector('.speakerR');
+    speakerL.current = document.querySelector(".speakerL");
+    speakerR.current = document.querySelector(".speakerR");
     gsap.from([speakerL.current, speakerR.current], {
       duration: 0.3,
       scale: 1.1,
       yoyo: true,
       repeat: -1,
-      ease: 'bounce.out',
+      ease: "bounce.out",
     });
   }, [isDocumentReady]);
 
   useEffect(() => {
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       isDocumentReady.current = true;
     }
   }, []);
@@ -233,7 +233,7 @@ export default function Stage({
             <div className="rightfoot"></div>
           </div>
         </div>
-        
+
         <div className="speakerL">
           <img src="https://image.ibb.co/iFP8Lq/speaker1.png" alt="" />
         </div>

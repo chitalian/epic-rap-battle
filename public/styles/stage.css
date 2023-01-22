@@ -86,15 +86,24 @@ canvas {
 .speakerL {
 	position: absolute;
 	left: 10%;
-	bottom: 250px;
-	z-index: 5;
+	/* bottom: 250px;
+	z-index: 5; */
+  bottom: 350px;
+  z-index: 0;
   /* scale: 0.8; */
 }
 
 .speakerR {
 	position: absolute;
 	right: 10%;
-	bottom: 250px;
-	z-index: 5;
+	/* bottom: 250px;
+	z-index: 5; */
+  bottom: 350px;
+  z-index: 0;
   /* scale: 0.8; */
 }
+
+/* 
+bottom: 350px;
+z-index: 0;
+*/
