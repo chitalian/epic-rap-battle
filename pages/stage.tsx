@@ -142,7 +142,7 @@ export default function Stage({
           setPerson1Lines((prev) => [...prev, person1Lines[i]]);
           await doAudio(person1Audios[i]);
         }
-
+        setActiveSpeaker("person2");
         for (let i = 0; i < person2Lines.length; i++) {
           setPerson2Lines((prev) => [...prev, person2Lines[i]]);
           await doAudio(person2Audios[i]);
