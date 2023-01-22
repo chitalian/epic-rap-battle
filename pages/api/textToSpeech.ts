@@ -14,12 +14,18 @@ const clientOpts = {
 
 const client = new texttospeech.TextToSpeechClient(clientOpts);
 
-export const DefaultVoice: any = {
-  languageCode: "en-US",
-  ssmlGender: "FEMALE",
-};
+const MaleVoice: texttospeech.protos.google.cloud.texttospeech.v1.IVoiceSelectionParams =
+  {
+    languageCode: "en-US",
+    name: "en-US-Standard-B",
+  };
+const FemaleVoice: texttospeech.protos.google.cloud.texttospeech.v1.IVoiceSelectionParams =
+  {
+    languageCode: "en-US",
+    name: "en-US-Standard-C",
+  };
 
-export const DefaultAudioConfig: any = {
+const DefaultAudioConfig: any = {
   audioEncoding: "MP3",
 };
 
@@ -28,18 +34,19 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Construct the request
-  const request = {
-    input: {
-      text: req.body.text,
-    },
-    // Select the language and SSML voice gender (optional)
-    //voice: {languageCode: 'en-US', ssmlGender: 'FEMALE'},
-    voice: DefaultVoice,
-    // Use WaveNet voice
+  const request: texttospeech.protos.google.cloud.texttospeech.v1.ISynthesizeSpeechRequest =
+    {
+      input: {
+        text: req.body.text,
+      },
+      // Select the language and SSML voice gender (optional)
+      //voice: {languageCode: 'en-US', ssmlGender: 'FEMALE'},
+      voice: req.body.gender === "male" ? MaleVoice : FemaleVoice,
+      // Use WaveNet voice
 
-    // select the type of audio encoding
-    audioConfig: DefaultAudioConfig,
-  };
+      // select the type of audio encoding
+      audioConfig: DefaultAudioConfig,
+    };
 
   // Performs the text-to-speech request
   const [response] = await client.synthesizeSpeech(request);

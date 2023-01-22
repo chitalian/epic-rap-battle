@@ -25,9 +25,13 @@
  * @param text - text to convert to speech
  * @returns Promise<HTMLAudioElement> - Audio element with the text converted to speech
  **/
-export function TTS(text: string): Promise<HTMLAudioElement> {
+export function TTS(
+  text: string,
+  gender: "male" | "female"
+): Promise<HTMLAudioElement> {
   return new Promise((resolve, reject) => {
     fetchTTS(
+      gender,
       text,
       (data) => {
         const b64 = Buffer.from(data).toString("base64");
@@ -42,6 +46,7 @@ export function TTS(text: string): Promise<HTMLAudioElement> {
   });
 }
 function fetchTTS(
+  gender: "male" | "female",
   text: string,
   onSuccess: (data: any) => void,
   onError: (error: string) => void
@@ -51,7 +56,7 @@ function fetchTTS(
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text: text }),
+    body: JSON.stringify({ gender: gender, text: text }),
   })
     .then((res) => {
       return res.json();
