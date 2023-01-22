@@ -63,6 +63,8 @@ body {
   display: flex;
   width: 100%;
   justify-content: center;
+  position: absolute;
+  bottom: 20px;
 }
 
 /* layout/base.css */
