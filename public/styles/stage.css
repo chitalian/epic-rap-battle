@@ -103,3 +103,19 @@ canvas {
 bottom: 350px;
 z-index: 0;
 */
+
+.lightL {
+	position: absolute;
+	left: 20%;
+	top: -195px;
+	z-index: 999;
+  width: 550px
+}
+
+.lightR {
+	position: absolute;
+	right: 20%;
+	top: -195px;
+	z-index: 999;
+  width: 550px
+}
