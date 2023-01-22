@@ -20,3 +20,7 @@ export const Conway: Track = {
   markers: [],
   bpm: 146,
 };
+
+export function bpmToSeconds(bpm: number): number {
+    return 60.0 / bpm
+}
