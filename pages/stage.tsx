@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect, useRef } from "react";
 import { fetchRapBattle } from "../lib/fetchRapBattle";
-import { RapVerse } from "./api/getBattle";
+import { Person, RapVerse } from "./api/getBattle";
 import { fetchImage } from "../lib/fetchImage";
 import { Conway, BehindBarz } from "../audio/track";
 import Script from "next/script";
@@ -67,7 +67,9 @@ export default function Stage({
       setIsSetup(true);
       console.log("HIIIIII");
     } else {
-      loadInitialRap(leftName, rightName).then(setRapVerses);
+      loadInitialRap(leftName, rightName).then((verse) => {
+        setRapVerses([...rapVerses, verse]);
+      });
       fetchImage(leftName, setLeftNameImage, () => {});
       fetchImage(rightName, setRightNameImage, () => {});
       console.log("PLAYING AUDIO");
@@ -78,33 +80,49 @@ export default function Stage({
         "Hello everyone! Thank you for visiting our Scale AI Hackathon project! Welcome to the stage, " +
           leftName +
           " and " +
-          rightName
-      )
-        .then((audio) => {
-          audio.play();
-        })
-        .then(() => {
-          setTimeout(() => {
-            setIntroDone(true);
-          }, 1000);
+          rightName,
+        "Male"
+      ).then((audio) => {
+        audio.play();
+
+        // event when audio compeletes
+        audio.addEventListener("ended", () => {
+          setIntroDone(true);
         });
+      });
     }
   }, [isSetup, leftName, rightName]);
-  const allLoaded =
-    leftName != "" &&
-    rightNameImage != "" &&
-    leftNameImage != "" &&
-    rightNameImage != "" &&
-    rapVerses.length > 0 &&
-    introDone;
+  console.log("RAP VERSSES", rapVerses);
+  const allLoaded = rapVerses.length > 0 && introDone;
 
   useEffect(() => {
-    async function mainRap() {}
-    if (allLoaded) {
+    async function doAudio(person: Person) {
+      return TTS(person.rap, person.gender).then((audio) => {
+        audio.play();
+        return new Promise((resolve) => {
+          console.log("started playing");
+          audio.addEventListener("ended", () => {
+            console.log("AUDIO ENDED");
+            resolve(undefined);
+          });
+        });
+      });
+    }
+    async function mainRap() {
+      console.log();
+      if (allLoaded) {
+        setActiveSpeaker("person1");
+        await doAudio(rapVerses[currentVerse].person1);
+
+        setActiveSpeaker("person2");
+        await doAudio(rapVerses[currentVerse].person2);
+      }
+    }
+    if (introDone) {
       console.log("ALL LOADED");
       mainRap();
     }
-  }, [allLoaded]);
+  }, [introDone]);
   return (
     <div>
       {/* eslint-disable-next-line @next/next/no-script-component-in-head */}

@@ -27,7 +27,7 @@
  **/
 export function TTS(
   text: string,
-  gender: "male" | "female"
+  gender: "Male" | "Female"
 ): Promise<HTMLAudioElement> {
   return new Promise((resolve, reject) => {
     fetchTTS(
@@ -46,7 +46,7 @@ export function TTS(
   });
 }
 function fetchTTS(
-  gender: "male" | "female",
+  gender: "Male" | "Female",
   text: string,
   onSuccess: (data: any) => void,
   onError: (error: string) => void

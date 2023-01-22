@@ -41,7 +41,7 @@ export default async function handler(
       },
       // Select the language and SSML voice gender (optional)
       //voice: {languageCode: 'en-US', ssmlGender: 'FEMALE'},
-      voice: req.body.gender === "male" ? MaleVoice : FemaleVoice,
+      voice: req.body.gender === "Male" ? MaleVoice : FemaleVoice,
       // Use WaveNet voice
 
       // select the type of audio encoding
