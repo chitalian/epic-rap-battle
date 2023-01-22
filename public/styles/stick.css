@@ -7,6 +7,7 @@
   height: 300px;
   display: block;
   position: relative;
+  margin: 0 50px 0 50px;
 }
 
 /* .head {
@@ -51,7 +52,7 @@
 }
 
 .active .head {
-  animation: rock 1s alternate infinite ease-in-out;
+  animation: alternate infinite ease-in-out;
 }
 
 /* .head:not(.active) {
@@ -64,6 +65,24 @@
   }
   100% {
     transform: rotate(10deg);
+  }
+}
+
+@keyframes rock-left {
+  0% {
+    transform: rotate(-17deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes rock-right {
+  0% {
+    transform: rotate(17deg);
+  }
+  100% {
+    transform: rotate(-3deg);
   }
 }
 
@@ -176,7 +195,7 @@
 }
 
 .people {
-  margin: auto;
-  width: 50%;
+  display: flex;
+  justify-content: center;
   padding-top: 220px;
 }

@@ -5,10 +5,11 @@ import { useState, useEffect, useRef } from "react";
 import { fetchRapBattle } from "../lib/fetchRapBattle";
 import { Person, RapVerse } from "./api/getBattle";
 import { fetchImage } from "../lib/fetchImage";
-import { Conway, BehindBarz } from "../audio/track";
+import { Conway, BehindBarz, bpmToSeconds } from "../audio/track";
 import Script from "next/script";
 import { Router, useRouter } from "next/router";
 import { TTS } from "../lib/fetchTTS";
+import { gsap } from "gsap";
 
 const MAX_VERSUS = 3;
 
@@ -48,6 +49,9 @@ export default function Stage({
   const [activeSpeaker, setActiveSpeaker] = useState("");
   const [rapStart, setRapStart] = useState(false);
 
+  const speakerL = useRef(null);
+  const speakerR = useRef(null);
+
   useEffect(() => {
     setActiveSpeaker("person1");
   }, []);
@@ -78,6 +82,13 @@ export default function Stage({
       console.log("PLAYING AUDIO");
       barzRef.current.volume = 0.3;
       barzRef.current.play();
+      gsap.from([speakerL.current, speakerR.current], {
+        duration: bpmToSeconds(BehindBarz.bpm) / 2,
+        scale: 1.1,
+        yoyo: true,
+        repeat: -1,
+        ease: "bounce.out",
+      });
       console.log("PLAYING BARZ", barzRef);
       TTS(
         "Hello everyone! Thank you for visiting our Scale AI Hackathon project! Welcome to the stage, " +
@@ -148,6 +159,9 @@ export default function Stage({
       mainRap();
     }
   }, [introDone, rapVerses]);
+
+  const hasCaption = caption != "";
+
   return (
     <div>
       {/* eslint-disable-next-line @next/next/no-script-component-in-head */}
@@ -162,6 +176,10 @@ export default function Stage({
         <link href="/styles/stage.css" rel="stylesheet" />
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link href="/styles/stick.css" rel="stylesheet" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Sedgwick+Ave"
+        />
         <Script src="/scripts/smoke.js"></Script>
       </Head>
       <div>
@@ -187,11 +205,19 @@ export default function Stage({
               style={{
                 backgroundImage: `url('${leftNameImage}')`,
                 backgroundSize: "cover",
+                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`,
+                animationName: "rock-right",
               }}
             ></div>
             <div className="torso"></div>
-            <div className="leftarm"></div>
-            <div className="rightarm"></div>
+            <div
+              className="leftarm"
+              style={{ animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s` }}
+            ></div>
+            <div
+              className="rightarm"
+              style={{ animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s` }}
+            ></div>
             <div className="leftleg"></div>
             <div className="leftfoot"></div>
             <div className="rightleg"></div>
@@ -207,17 +233,34 @@ export default function Stage({
               style={{
                 backgroundImage: `url('${rightNameImage}')`,
                 backgroundSize: "cover",
+                animationDuration: `${bpmToSeconds(BehindBarz.bpm) / 2}s`,
+                animationName: "rock-left",
               }}
             ></div>
             <div className="torso"></div>
-            <div className="leftarm"></div>
-            <div className="rightarm"></div>
+            <div
+              className="leftarm"
+              style={{ animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s` }}
+            ></div>
+            <div
+              className="rightarm"
+              style={{ animationDuration: `${bpmToSeconds(BehindBarz.bpm)}s` }}
+            ></div>
             <div className="leftleg"></div>
             <div className="leftfoot"></div>
             <div className="rightleg"></div>
             <div className="rightfoot"></div>
           </div>
         </div>
+
+        <div className="speakerL" ref={speakerL}>
+          <img src="https://image.ibb.co/iFP8Lq/speaker1.png" alt="" />
+        </div>
+
+        <div className="speakerR" ref={speakerR}>
+          <img src="https://image.ibb.co/nt0hfq/speaker2.png" alt="" />
+        </div>
+
         <div className="caption-container">
           <div className="flex flex-row max-w-3xl justify-between w-full">
             <div className="flex flex-col  max-w-md">
