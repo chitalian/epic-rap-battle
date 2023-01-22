@@ -27,30 +27,41 @@ export default function Home() {
       <h1 className="pt-10 text-6xl font-bold text-center">
         CHOOSE YOUR EPIC RAP BATTLE
       </h1>
-      <div className="max-w-md flex flex-col gap-2 m-10">
-        <input
-          className="py-2 px-4 rounded bg-transparent w-full border border-fuchsia-500"
-          value={name1}
-          placeholder="Person 1"
-          onChange={(e) => setName1(e.target.value)}
-        />
-        <p>
-          {name1} vs {name2}
-        </p>
-        <input
-          className="py-2 px-4 rounded bg-transparent w-full border border-fuchsia-500"
-          value={name2}
-          placeholder="Person 2"
-          onChange={(e) => setName2(e.target.value)}
-        />
-        <button
-          className="py-2 px-4 rounded bg-fuchsia-500 text-white"
-          onClick={() => {
-            setSessionStarted(true);
-          }}
-        >
-          Generate
-        </button>
+      <div className="flex flex-col justify-between">
+        <div className="max-w-md flex flex-col gap-2 m-10">
+          <input
+            className="py-2 px-4 rounded bg-transparent w-full border border-fuchsia-500"
+            value={name1}
+            placeholder="Person 1"
+            onChange={(e) => setName1(e.target.value)}
+          />
+          <p>
+            {name1} vs {name2}
+          </p>
+          <input
+            className="py-2 px-4 rounded bg-transparent w-full border border-fuchsia-500"
+            value={name2}
+            placeholder="Person 2"
+            onChange={(e) => setName2(e.target.value)}
+          />
+          <button
+            className="py-2 px-4 rounded bg-fuchsia-500 text-white"
+            onClick={() => {
+              setSessionStarted(true);
+            }}
+          >
+            Generate
+          </button>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <div>Scale AI Hackathon project team</div>
+          <div className="flex flex-row gap-10 text-blue-400 font-bold">
+            <a href="https://twitter.com/calumbirdo">@calumbirdo</a>
+            <a href="https://twitter.com/justinstorre">@justinstorre</a>
+            <a href="https://twitter.com/KaelanMikowicz">@KaelanMikowicz</a>
+            <a href="https://twitter.com/miguelace_">@miguelace_</a>
+          </div>
+        </div>
       </div>
     </div>
   );
