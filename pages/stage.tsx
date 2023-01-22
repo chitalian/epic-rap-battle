@@ -76,7 +76,7 @@ export default function Stage({
       fetchImage(leftName, setLeftNameImage, () => {});
       fetchImage(rightName, setRightNameImage, () => {});
       console.log("PLAYING AUDIO");
-      barzRef.current.volume = 0.4;
+      barzRef.current.volume = 0.3;
       barzRef.current.play();
       console.log("PLAYING BARZ", barzRef);
       TTS(
