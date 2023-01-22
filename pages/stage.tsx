@@ -261,6 +261,18 @@ export default function Stage({
           <img src="https://image.ibb.co/nt0hfq/speaker2.png" alt="" />
         </div>
 
+        {activeSpeaker === "person1" && (
+        <div className="lightL">
+          <img src="https://image.ibb.co/f6Hv0q/lightL.png" alt="" />
+        </div>
+        )}
+
+        {activeSpeaker === "person2" && (
+        <div className="lightR">
+          <img src="https://image.ibb.co/j6Lhfq/lightR.png" alt="" />
+        </div>
+        )}
+
         <div className="caption-container">
           <div className="flex flex-row max-w-3xl justify-between w-full">
             <div className="flex flex-col  max-w-md">
