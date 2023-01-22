@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { fetchRapBattle } from "../lib/fetchRapBattle";
 import { RapVerse } from "./api/getBattle";
 import { fetchImage } from "../lib/fetchImage";
+import { Conway, BehindBarz } from "../audio/track"
 
 async function loadInitialRap(leftName, rightName) {
   return await fetchRapBattle(
@@ -96,8 +97,8 @@ export default function Stage(props) {
         </div>
       </div>
 
-      <audio src="/tracks/behindbarz.m4a" ref={barzRef}></audio>
-      <audio src="/tracks/conway.m4a" ref={conwayRef}></audio>
+      <audio src={BehindBarz.uri} ref={barzRef}></audio>
+      <audio src={Conway.uri} ref={conwayRef}></audio>
     </div>
   );
 }

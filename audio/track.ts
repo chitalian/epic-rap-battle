@@ -6,19 +6,17 @@ export interface Marker {
 export interface Track {
     uri: string
     markers: Array<Marker>
+    bpm: number
 }
 
 export const BehindBarz: Track = {
     uri: './audio/tracks/behindbarz.m4a',
-    markers: []
+    markers: [],
+    bpm: 85
 }
 
 export const Conway: Track = {
-    uri: './audio/tracks/conway.m4a'
-}
-
-export function findMarker(track: Track)
-
-export function playTrack(track: Track) {
-
+    uri: './audio/tracks/conway.m4a',
+    markers: [],
+    bpm: 146
 }
