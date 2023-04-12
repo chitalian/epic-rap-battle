@@ -31,7 +31,7 @@ interface OAIResponse {
   error: string;
 }
 
-const oaiBase = "https://oai.valyrai.com/v1";
+const oaiBase = "https://oai.hconeai.com/v1";
 const oaiURL = (endpoint: string, model: string) =>
   `${oaiBase}/engines/${model}/${endpoint}`;
 
