@@ -45,6 +45,7 @@ async function getOpenAICompletion(
       "Content-Type": "application/json",
       Authorization: `Bearer ${apikey}`,
       "User-ID": "1",
+      "Helicone-Auth": "Bearer " + process.env.HELICONE_API_KEY ?? "",
     },
     body: JSON.stringify({
       prompt,
