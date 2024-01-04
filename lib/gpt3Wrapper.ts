@@ -39,7 +39,7 @@ async function getOpenAICompletion(
   prompt: string,
   apikey: string
 ): Promise<Result<string, string>> {
-  let response = await fetch(oaiURL("completions", "text-davinci-003"), {
+  let response = await fetch(oaiURL("completions", "gpt-3.5-turbo-instruct"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
