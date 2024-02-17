@@ -39,39 +39,41 @@ async function getOpenAICompletion(
   prompt: string,
   apikey: string
 ): Promise<Result<string, string>> {
-  let response = await fetch(oaiURL("completions", "gpt-3.5-turbo-instruct"), {
+  let response = await fetch("http://localhost:8787/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apikey}`,
       "User-ID": "1",
       "Helicone-Auth": "Bearer " + process.env.HELICONE_API_KEY ?? "",
+      "Helicone-Prompt-Id": "Rap Battle",
     },
     body: JSON.stringify({
-      prompt,
-      max_tokens: 2048,
-      temperature: 0.0,
-      frequency_penalty: 1,
-      presence_penalty: 2,
-      stop: ["```"],
-      top_p: 1,
-      logprobs: 1,
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: prompt,
+        },
+      ],
     }),
   });
 
   if (response.status === 200) {
-    let json = (await response.json()) as OAIResponse;
+    let json = (await response.json()) as any;
     if (json.error) {
       return { error: json.error, data: null };
     }
     if (!json.choices || json.choices.length === 0) {
       return { error: "No choices", data: null };
     }
+    console.log("JSON", json.choices[0].message.content);
     return {
       error: null,
-      data: json.choices[0].text as string,
+      data: json.choices[0].message.content,
     };
   }
+  console.error("Error", response.status, response.statusText);
 
   return { error: "Error", data: null };
 }

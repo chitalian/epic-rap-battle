@@ -1,5 +1,5 @@
 import { RapVerse } from "../pages/api/getBattle";
-
+import { hprompt } from "@helicone/helicone";
 export interface RapperConfig {
   rhyme: number;
   creativity: number;
@@ -25,7 +25,9 @@ export function promptBuilder({
   person2,
   prevVerses = [],
 }: BattleRequest): string {
-  return `This is a rap battle between ${person1.name} and ${person2.name}.
+  return hprompt`This is a rap battle between ${{
+    person1: person1.name,
+  }} and ${{ person2: person2.name }}.
 
 Here are the rules that apply to each rapper with the following multipliers:
 - Lines in a verse must rhyme
@@ -36,13 +38,17 @@ Here are the rules that apply to each rapper with the following multipliers:
 
 Verse format:
 \`\`\`
-${person1.name} - {gender}
+${{
+  person1: person1.name,
+}} - {gender}
 {line},
 {line}.
 {line},
 {line}.
 ---
-${person2.name} - {gender}
+${{
+  person1: person1.name,
+}} - {gender}
 {line},
 {line}.
 {line},
@@ -51,14 +57,18 @@ ${person2.name} - {gender}
 
 Multipliers:
 {
-${person1.name}: {
+  ${{
+    person1: person1.name,
+  }}: {
     "rhyme": ${person1.config.rhyme},
     "creativity": ${person1.config.creativity},
     "flaunting": ${person1.config.flaunting},
     "make_fun": ${person1.config.make_fun},
     "aggressiveness": ${person1.config.aggressiveness}
 },
-${person2.name}: {
+${{
+  person2: person2.name,
+}}: {
     "rhyme": ${person2.config.rhyme},
     "creativity": ${person2.config.creativity},
     "flaunting": ${person2.config.flaunting},
@@ -69,7 +79,7 @@ ${person2.name}: {
 
 
 Previous verses:
-\`\`\`
+\`\`\`<helicone-prompt-input key="prevVerses" >
 ${prevVerses.length > 0 ? "" : "None"}
 ${prevVerses
   .map((verse) => {
@@ -79,7 +89,7 @@ ${verse.person1.rap}
 ${verse.person2.name} - ${verse.person2.gender}
 ${verse.person2.rap}`;
   })
-  .join("\n\n")}
+  .join("\n\n")} </helicone-prompt-input>
 \`\`\`
 
 Next verse:
